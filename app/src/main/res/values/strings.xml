@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SpeakingView</string>
+    <string name="mainEditTextHint">Input text and tap speaking view below</string>
+    <string name="speakingViewDescription">Click this to speak text</string>
+</resources>
