@@ -32,6 +32,7 @@
     </android.support.design.widget.TextInputLayout>
 
     <com.dvinc.speakingview.SpeakingView
+        android:id="@+id/speakingView"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="8dp"

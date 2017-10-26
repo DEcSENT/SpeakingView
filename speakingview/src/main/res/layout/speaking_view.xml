@@ -13,5 +13,4 @@
         android:contentDescription="@string/speakingView_imageDescription"
         android:padding="8dp"
         app:srcCompat="@drawable/ic_speaking_view" />
-
 </FrameLayout>
