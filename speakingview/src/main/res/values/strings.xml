@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SpeakingView</string>
     <string name="speakingView_imageDescription">Speaking view</string>
+    <string name="speakingview_backgroundDescription">Animation background</string>
 </resources>
