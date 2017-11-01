@@ -6,6 +6,13 @@
     android:orientation="vertical">
 
     <ImageView
+        android:contentDescription="@string/speakingview_backgroundDescription"
+        android:id="@+id/backgroundView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:layout_margin="20dp"
         android:id="@+id/speaking_view_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

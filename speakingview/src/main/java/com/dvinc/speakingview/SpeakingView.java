@@ -6,8 +6,9 @@ import android.speech.tts.TextToSpeech;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 
 import java.util.Locale;
@@ -20,11 +21,18 @@ import java.util.Locale;
 public class SpeakingView extends FrameLayout {
 
     private TextToSpeech textToSpeech;
-    FrameLayout rootView;
+    private FrameLayout rootView;
+    private Animation circleAnimation;
+    private View backgroundView;
+    private boolean isPhrasePlaying;
 
     public SpeakingView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         rootView = (FrameLayout) inflate(context, R.layout.speaking_view, this);
+        backgroundView = findViewById(R.id.backgroundView);
+
+        circleAnimation = AnimationUtils.loadAnimation(context, R.anim.circle_animation);
+        circleAnimation.setAnimationListener(circleAnimation1Listener);
 
         textToSpeech = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
             @Override
@@ -45,10 +53,39 @@ public class SpeakingView extends FrameLayout {
         } else {
             textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
         }
-        //TODO animation here?
+
+        startCircleAnimation();
+        //TODO: Maybe add default text with error animation?
     }
 
     public void disposeView(){
         textToSpeech.shutdown();
     }
+
+    void startCircleAnimation(){
+        backgroundView.startAnimation(circleAnimation);
+    }
+
+    Animation.AnimationListener circleAnimation1Listener = new Animation.AnimationListener() {
+        @Override
+        public void onAnimationStart(Animation animation) {
+            isPhrasePlaying = true;
+            backgroundView.setBackgroundResource(R.drawable.circle);
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            if(textToSpeech.isSpeaking()){
+                //TODO: Warning, need other animation because this gives bug with circle!
+                startCircleAnimation();
+            } else {
+                backgroundView.setBackground(null);
+            }
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+
+        }
+    };
 }
